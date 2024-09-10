@@ -5,13 +5,17 @@ import { AudioPlayer } from './AudioPlayer';
 export const TrackList = ({ tracks, playTrack, artistImage, artistName }) => {
     const [currentTrack, setCurrentTrack] = useState(null);
     const [currentUrl, setCurrentUrl] = useState(null);
-    const [currentAlbumImage, setCurrentAlbumImage] = useState(artistImage); 
+    const [currentAlbumImage, setCurrentAlbumImage] = useState(artistImage);  
+    const [currentArtistName, setCurrentArtistName] = useState(artistName);  
 
     const handlePlay = (track) => {
-        setCurrentTrack(track.name); 
-        setCurrentUrl(track.preview_url);
-        setCurrentAlbumImage(track.album_image);
-        playTrack(track.preview_url);
+        if (track.name !== currentTrack) {
+            setCurrentTrack(track.name); 
+            setCurrentUrl(track.preview_url);
+            setCurrentAlbumImage(track.album_image); 
+            setCurrentArtistName(artistName);      
+            playTrack(track.preview_url);
+        }
     };
 
     return (
@@ -38,7 +42,7 @@ export const TrackList = ({ tracks, playTrack, artistImage, artistName }) => {
                     <div className="card" style={{ width: '25rem', backgroundColor: 'rgba(0, 0, 0, 0.7)', color: 'white'}}>
                         <img src={currentAlbumImage || "https://i.ibb.co/Hgmgfgs/Logo-Spotify.jpg"} className="card-img-top" alt="Album"/>
                         <div className="card-body">
-                            <h1 className="card-title">{currentTrack || 'Sin Reproducciones'}</h1>
+                            <h5 className="card-subtitle mb-2">{currentArtistName || 'Artista no disponible'}</h5>
                             <AudioPlayer trackName={currentTrack} url={currentUrl} />
                         </div>
                     </div>

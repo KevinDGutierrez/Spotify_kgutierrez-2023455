@@ -19,3 +19,4 @@ export const AudioPlayer = ({ trackName, url }) => {
         </div>
     );
 };
+
