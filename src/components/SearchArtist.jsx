@@ -5,7 +5,7 @@ export const SearchArtist = ({ searchArtist }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        searchArtist(query); // Realiza la búsqueda del artista
+        searchArtist(query);
     }
 
     return (

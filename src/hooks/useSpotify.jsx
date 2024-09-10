@@ -3,19 +3,23 @@ import { searchArtistAPI, getArtistTracksAPI } from '../services/spotify';
 
 export const useSpotify = () => {
     const [tracks, setTracks] = useState([]);
-    const [currentAudio, setCurrentAudio] = useState(null); // Nuevo estado para controlar la reproducción de audio
+    const [artistImage, setArtistImage] = useState(null); 
+    const [artistName, setArtistName] = useState(''); 
+    const [currentAudio, setCurrentAudio] = useState(null); 
 
     const searchArtist = async (artistName) => {
         const artist = await searchArtistAPI(artistName);
         if (artist) {
             const tracks = await getArtistTracksAPI(artist.id);
             setTracks(tracks);
+            setArtistImage(artist.images[0]?.url || null);
+            setArtistName(artist.name); 
         }
     };
 
     const playTrack = (url) => {
         if (currentAudio) {
-            currentAudio.pause(); // Detener la canción anterior si está reproduciendo
+            currentAudio.pause();
         }
         const audio = new Audio(url);
         setCurrentAudio(audio);
@@ -26,5 +30,7 @@ export const useSpotify = () => {
         searchArtist,
         tracks,
         playTrack,
+        artistImage,
+        artistName,  
     };
 };

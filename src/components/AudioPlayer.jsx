@@ -5,12 +5,12 @@ export const AudioPlayer = ({ trackName, url }) => {
 
     useEffect(() => {
         if (audioRef.current) {
-            audioRef.current.pause(); // Pausa el audio actual
-            audioRef.current.src = url; // Actualiza la URL
-            audioRef.current.load(); // Recarga el audio
-            audioRef.current.play(); // Reproduce el nuevo audio
+            audioRef.current.pause();
+            audioRef.current.src = url; 
+            audioRef.current.load(); 
+            audioRef.current.play(); 
         }
-    }, [url]); // Reproduce la nueva URL cuando cambia
+    }, [url]); 
 
     return (
         <div>
